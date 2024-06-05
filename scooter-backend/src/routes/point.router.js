@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const {
   getPoints,
-  getPointById,
+  getScooterByPointId,
   insertPoint
 } = require('../controllers/point.controller');
 
@@ -21,9 +21,9 @@ router.get('/', getPoints);
 
 /**
  * @swagger
- * /points/{id}:
+ * /points/{id}/scooters:
  *   get:
- *     summary: Get Point by ID
+ *     summary: Get Scooters by Point ID
  *     tags: [Points]
  *     parameters:
  *       - in: path
@@ -38,7 +38,7 @@ router.get('/', getPoints);
  *       '404':
  *         description: Point not found
  */
-router.get('/:id', getPointById);
+router.get('/:id/scooters', getScooterByPointId);
 
 /**
  * @swagger

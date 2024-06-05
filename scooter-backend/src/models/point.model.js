@@ -1,5 +1,6 @@
 const database = require('../database/database');
 const TABLE = 'Point';
+const SCOOTER_TABLE = 'Scooter';
 
 async function findAll () {
   return database.query(
@@ -7,9 +8,11 @@ async function findAll () {
   );
 }
 
-async function findById (id) {
+async function findScootersByPointId (id) {
   return database.query(
-    `SELECT * FROM ${TABLE} WHERE Point_ID = $1`,
+    `SELECT ${SCOOTER_TABLE}.Scooter_ID, ${SCOOTER_TABLE}.Status 
+    FROM ${TABLE} INNER JOIN ${SCOOTER_TABLE} ON ${TABLE}.Point_ID = ${SCOOTER_TABLE}.Point_ID 
+    WHERE ${TABLE}.Point_ID = $1`,
     [id]
   );
 }
@@ -23,6 +26,6 @@ async function create (PointId, Location, Capacity) {
 
 module.exports = {
   findAll,
-  findById,
+  findScootersByPointId,
   create,
 };

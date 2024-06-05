@@ -7,11 +7,11 @@ const getPoints = async (req, res) => {
   else res.status(404).send("Points not founded");
 };
 
-const getPointById = async (req, res) => {
-  const point = await pointModel.findById(req.params.id);
+const getScooterByPointId = async (req, res) => {
+  const scooters = await pointModel.findScootersByPointId(req.params.id);
 
-  if (point.rows.length > 0) res.status(200).json(point.rows);
-  else res.status(404).send("Point not found");
+  if (scooters.rows.length > 0) res.status(200).json(scooters.rows);
+  else res.status(404).send("Scooters not found");
 };
 
 const insertPoint = async (req, res) => {
@@ -27,6 +27,6 @@ const insertPoint = async (req, res) => {
 
 module.exports = {
   getPoints,
-  getPointById,
+  getScooterByPointId,
   insertPoint
 };
