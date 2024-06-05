@@ -9,7 +9,7 @@ async function main() {
 
     console.log("Served started on PORT:" + process.env.PORT_HOST);
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error("Error starting server:", error);
   }
 }
 
