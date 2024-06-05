@@ -56,6 +56,9 @@ router.get('/:id', getScooterById);
  *               Scooter_ID:
  *                 type: string
  *                 description: scooter id
+ *               Point_ID:
+ *                 type: integer
+ *                 description: scooter id
  *     responses:
  *       '201':
  *         description: Scooter created

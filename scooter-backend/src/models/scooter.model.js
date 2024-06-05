@@ -14,10 +14,10 @@ async function findById (id) {
   );
 }
 
-async function create (ScooterId) {
+async function create (ScooterId, Point_ID) {
   return database.query(
-    `INSERT INTO ${TABLE} (Scooter_ID) VALUES ($1)`,
-    [ScooterId]
+    `INSERT INTO ${TABLE} (Scooter_ID, Point_ID) VALUES ($1, $2)`,
+    [ScooterId, Point_ID]
   );
 }
 
