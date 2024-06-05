@@ -5,15 +5,6 @@ DROP TABLE IF EXISTS "User";
 DROP TABLE IF EXISTS Scooter;
 DROP TABLE IF EXISTS Point;
 
--- Create User table
-CREATE TABLE "User" (
-    DNI SERIAL PRIMARY KEY,
-    Name VARCHAR(255),
-    Surname VARCHAR(255),
-    Total_Bonus INT,
-    Total_Penalty INT
-);
-
 -- Create Point table
 CREATE TABLE Point (
     Point_ID SERIAL PRIMARY KEY,
@@ -31,7 +22,7 @@ CREATE TABLE Scooter (
 -- Create Rent table
 CREATE TABLE Rent (
     Rent_ID SERIAL PRIMARY KEY,
-    DNI INT REFERENCES "User"(DNI),
+    DNI INT,
     Scooter_ID VARCHAR(128) REFERENCES Scooter(Scooter_ID),
     Pickup_Point_ID INT REFERENCES Point(Point_ID),
     Dropoff_Point_ID INT REFERENCES Point(Point_ID),
@@ -43,7 +34,7 @@ CREATE TABLE Rent (
 -- Create Bonus_Penalty_History table
 CREATE TABLE Bonus_Penalty_History (
     History_ID SERIAL PRIMARY KEY,
-    DNI INT REFERENCES "User"(DNI),
+    DNI INT,
     Type VARCHAR(10) CHECK (Type IN ('bonus', 'penalty')),
     Minutes INT,
     Date DATE
@@ -73,3 +64,4 @@ INSERT INTO Point (Location, Capacity) VALUES
 ('Calle 3', 10),
 ('Calle 4', 10),
 ('Calle 5', 10);
+('Calle 6', 10);
