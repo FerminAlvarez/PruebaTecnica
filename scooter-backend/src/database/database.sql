@@ -65,3 +65,11 @@ CREATE TRIGGER update_point_id
 BEFORE UPDATE ON Scooter
 FOR EACH ROW
 EXECUTE FUNCTION update_point_id();
+
+
+INSERT INTO Point (Location, Capacity) VALUES
+('Calle 1', 10),
+('Calle 2', 10),
+('Calle 3', 10),
+('Calle 4', 10),
+('Calle 5', 10);
