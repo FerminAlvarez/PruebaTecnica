@@ -46,8 +46,6 @@ router.get('/:id', getPointById);
  *   post:
  *     summary: Create point
  *     tags: [Points]
- *     security:
- *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

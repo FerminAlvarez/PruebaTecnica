@@ -46,8 +46,6 @@ router.get('/:id', getScooterById);
  *   post:
  *     summary: Create scooter
  *     tags: [Scooters]
- *     security:
- *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
