@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const {
   getScooters,
   getScooterById,
-  insertScooter
-} = require('../controllers/scooter.controller');
+  insertScooter,
+} = require("../controllers/scooter.controller");
 
 const router = Router();
 
@@ -17,7 +17,7 @@ const router = Router();
  *       '200':
  *         description: Scooters
  */
-router.get('/', getScooters);
+router.get("/", getScooters);
 
 /**
  * @swagger
@@ -38,7 +38,7 @@ router.get('/', getScooters);
  *       '404':
  *         description: Scooter not found
  */
-router.get('/:id', getScooterById);
+router.get("/:id", getScooterById);
 
 /**
  * @swagger
@@ -65,6 +65,6 @@ router.get('/:id', getScooterById);
  *       '400':
  *         description: Invalid scooter data
  */
-router.post('/', insertScooter);
+router.post("/", insertScooter);
 
 module.exports = router;

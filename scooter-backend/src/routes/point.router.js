@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const {
   getPoints,
   getScooterByPointId,
-  insertPoint
-} = require('../controllers/point.controller');
+  insertPoint,
+} = require("../controllers/point.controller");
 
 const router = Router();
 
@@ -17,7 +17,7 @@ const router = Router();
  *       '200':
  *         description: Points
  */
-router.get('/', getPoints);
+router.get("/", getPoints);
 
 /**
  * @swagger
@@ -38,7 +38,7 @@ router.get('/', getPoints);
  *       '404':
  *         description: Point not found
  */
-router.get('/:id/scooters', getScooterByPointId);
+router.get("/:id/scooters", getScooterByPointId);
 
 /**
  * @swagger
@@ -68,6 +68,6 @@ router.get('/:id/scooters', getScooterByPointId);
  *       '400':
  *         description: Invalid point data
  */
-router.post('/', insertPoint);
+router.post("/", insertPoint);
 
 module.exports = router;

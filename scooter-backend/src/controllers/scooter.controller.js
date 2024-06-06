@@ -15,8 +15,9 @@ const getScooterById = async (req, res) => {
 };
 
 const insertScooter = async (req, res) => {
-    const { Scooter_ID, Point_ID } = req.body;
-    scooterModel.create(Scooter_ID, Point_ID)
+  const { Scooter_ID, Point_ID } = req.body;
+  scooterModel
+    .create(Scooter_ID, Point_ID)
     .then(() => {
       res.status(201).send({ message: "Scooter created successfully" });
     })
@@ -28,5 +29,5 @@ const insertScooter = async (req, res) => {
 module.exports = {
   getScooters,
   getScooterById,
-  insertScooter
+  insertScooter,
 };
