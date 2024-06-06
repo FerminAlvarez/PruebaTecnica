@@ -5,6 +5,10 @@ async function findAll() {
   return database.query(`SELECT * FROM ${TABLE}`);
 }
 
+async function findByDNI(DNI) {
+  return database.query(`SELECT * FROM ${TABLE} WHERE DNI = $1`, [DNI]);
+}
+
 async function findActiveRents() {
   return database.query(`SELECT * FROM ${TABLE} WHERE End_Date_Time IS NULL`);
 }
@@ -36,6 +40,7 @@ async function update(Rent_ID) {
 
 module.exports = {
   findAll,
+  findByDNI,
   findActiveRents,
   findWithEndtimeNull,
   create,

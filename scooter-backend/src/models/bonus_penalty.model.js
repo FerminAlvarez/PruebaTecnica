@@ -19,8 +19,16 @@ async function findByDNIAndDate(dni, start_date, end_date) {
   );
 }
 
+async function create(DNI, Type, Minutes) {
+  return database.query(
+    `INSERT INTO ${TABLE} (DNI, Type, Minutes, Date) VALUES ($1, $2, $3, NOW()) returning *`,
+    [DNI, Type, Minutes],
+  );
+}
+
 module.exports = {
   findAll,
   findByDNI,
-  findByDNIAndDate
+  findByDNIAndDate,
+  create
 };
