@@ -1,7 +1,31 @@
 const { Router } = require("express");
-const { insertRent, updateRent } = require("../controllers/rent.controller.js");
+const { getAllRents, getAllActiveRents, insertRent, updateRent } = require("../controllers/rent.controller.js");
 
 const router = Router();
+
+/**
+ * @swagger
+ * /rents:
+ *   get:
+ *     summary: Get all rents
+ *     tags: [Rents]
+ *     responses:
+ *       '200':
+ *         description: Rents
+ */
+router.get("/", getAllRents);
+
+/**
+ * @swagger
+ * /rents/active:
+ *   get:
+ *     summary: Get all active rents
+ *     tags: [Rents]
+ *     responses:
+ *       '200':
+ *         description: Rents
+ */
+router.get("/active", getAllActiveRents);
 
 /**
  * @swagger
