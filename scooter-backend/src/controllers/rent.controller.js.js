@@ -4,19 +4,27 @@ const scooterModel = require("../models/scooter.model");
 const insertRent = async (req, res) => {
   const { DNI, Scooter_ID } = req.body;
 
-  rentModel
-    .create(DNI, Scooter_ID)
-    .then((data) => {
-      res
-        .status(201)
-        .send({
-          message: "Rent created successfully",
-          data: data.rows[0] || [],
-        });
-    })
-    .catch((error) => {
-      res.status(500).send({ message: error.message });
-    });
+  rentModel.findWithEndtimeNull(DNI).then((data) => {
+    if (data.rows.length > 0) {
+      return res.status(409).send({ message: "El usuario ya tiene monopatín alquilado." });
+    } else {
+      rentModel
+      .create(DNI, Scooter_ID)
+      .then((data) => {
+        res
+          .status(201)
+          .send({
+            message: "Se ha alquilado correctamente!",
+            data: data.rows[0] || [],
+          });
+      })
+      .catch((error) => {
+        res.status(500).send({ message: error.message });
+      });
+    }
+  });
+
+  
 };
 
 const updateRent = async (req, res) => {

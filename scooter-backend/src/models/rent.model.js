@@ -19,7 +19,15 @@ async function update(Rent_ID) {
   );
 }
 
+async function findWithEndtimeNull(DNI) {
+  return database.query(
+    `SELECT * FROM ${TABLE} WHERE DNI = $1 AND End_Date_Time IS NULL`,
+    [DNI],
+  );
+}
+
 module.exports = {
   create,
   update,
+  findWithEndtimeNull
 };

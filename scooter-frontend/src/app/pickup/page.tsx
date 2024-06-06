@@ -39,10 +39,9 @@ export default function Home() {
       body: JSON.stringify({ DNI: dni, Scooter_ID: selectedScooter}),
     });
 
-    if (res.ok) 
-      alert("Alquilado");
-    else
-      alert("No se pudo alquilar"); 
+    let data = await res.json();
+
+    alert(data.message);
   }
 
 
