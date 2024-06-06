@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [points, setPoints] = useState(undefined);
   const [scooters, setScooters] = useState(undefined);
+  const [selectedScooter, setSelectedScooter] = useState(undefined);
+  const [dni, setDni] = useState(undefined);
 
   async function getPoints() {
     const res = await fetch("http://localhost:3001/points");
@@ -27,6 +29,22 @@ export default function Home() {
 
     setScooters(data);
   }
+
+  async function rent() {
+    const res = await fetch(`http://localhost:3001/rents`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ DNI: dni, Scooter_ID: selectedScooter}),
+    });
+
+    if (res.ok) 
+      alert("Alquilado");
+    else
+      alert("No se pudo alquilar"); 
+  }
+
 
   useEffect(() => {
     getPoints();
@@ -64,8 +82,11 @@ export default function Home() {
           <select
             className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             disabled={!scooters}
+            onChange={(event) => setSelectedScooter(event.target.value)}
           >
             {!scooters && <option>No hay monopatines disponibles</option>}
+
+            {!selectedScooter && <option>Seleccione un punto de retiro</option> }
 
             {scooters &&
               scooters.map((scooter) => (
@@ -80,8 +101,16 @@ export default function Home() {
             className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             type="number"
             disabled= {!scooters}
+            onChange={(event) => setDni(event.target.value)}
           />
         </div>
+
+        {dni && selectedScooter && 
+          <button className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            onClick={() => rent()}> 
+            Alquilar
+          </button>
+        }
         
       </form>
     </main>
