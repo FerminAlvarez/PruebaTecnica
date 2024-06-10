@@ -3,6 +3,7 @@ const {
   getBonusAndPenalty,
   getBonusAndPenaltyByDNI,
   getBonusAndPenaltyByDNIAndDate,
+  createBonusOrPenalty
 } = require("../controllers/bonus_penalty.controller");
 
 const router = Router();
@@ -73,5 +74,38 @@ router.get("/:dni", getBonusAndPenaltyByDNI);
  */
 
 router.get("/:dni/dates", getBonusAndPenaltyByDNIAndDate);
+
+/**
+ * @swagger
+ * /bonus_penalties/{dni}:
+ *   post:
+ *     summary: Create bonus or penalty
+ *     tags: [Bonus and Penalties]
+ *     parameters:
+ *       - in: path
+ *         name: dni
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: DNI of the user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               Type:
+ *                 type: string
+ *                 enum: [bonus, penalty]
+ *                 required: true
+ *               Minutes:
+ *                 type: integer
+ *                 required: true
+ *     responses:
+ *       '200':
+ *         description: Bonus or penalty created
+ */
+router.post("/:dni", createBonusOrPenalty);
 
 module.exports = router;

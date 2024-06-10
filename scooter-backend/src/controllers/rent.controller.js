@@ -45,6 +45,9 @@ const insertRent = async (req, res) => {
 
     const total_time = await calculateTime(DNI);
 
+    if (total_time < 0) 
+      return res.status(409).send({ message: "Se ha quedado sin tiempo para alquilar." });
+
     return res.status(201).send({
       message: `¡Se ha alquilado correctamente! Le quedan: ${total_time} minutos`,
       data: rentData.rows[0] || [],
@@ -85,24 +88,41 @@ const calculateTime = async (DNI) => {
     getCurrentDateTimeMinus7DaysInISOFormat(),
     getCurrentDateTimeInISOFormat(),
   );
+
   if (bonus_penalties.rows.length > 0)
     bonus_penalties.rows.map((bonus_penalty) => {
-      if (bonus_penalty.type == "bonus") total_time += BONUS_TIME;
-      if (bonus_penalty.type == "penalty") total_time -= PENALTY_TIME;
+      if (bonus_penalty.type == "bonus") total_time += bonus_penalty.minutes;
+      if (bonus_penalty.type == "penalty") total_time -= bonus_penalty.minutes;
     });
   return total_time;
 };
 
 const updateRent = async (req, res) => {
-  const { Rent_ID, Scooter_ID, Point_ID } = req.body;
+  const { DNI, Rent_ID, Scooter_ID, Point_ID } = req.body;
 
   try {
     const rentData = await rentModel.update(Rent_ID);
     await scooterModel.update(Scooter_ID, Point_ID);
 
+    const bonus_penalties = await bonus_penaltyModel.findByDNIAndDate(
+      DNI,
+      getCurrentDateTimeMinus7DaysInISOFormat(),
+      getCurrentDateTimeInISOFormat(),
+    );
+
+    total_time_bonus = 0;
+    total_time_penalty = 0;
+    if (bonus_penalties.rows.length > 0)
+      bonus_penalties.rows.map((bonus_penalty) => {
+        if (bonus_penalty.type == "bonus") total_time_bonus += bonus_penalty.minutes;
+        if (bonus_penalty.type == "penalty") total_time_penalty -= bonus_penalty.minutes;
+      });
+
     res.status(201).send({
       message: "Monopatín entregado correctamente.",
       data: rentData.rows[0],
+      total_time_bonus: total_time_bonus,
+      total_time_penalty: total_time_penalty,
     });
   } catch (error) {
     res.status(500).send({ message: "Scooter not found" });
