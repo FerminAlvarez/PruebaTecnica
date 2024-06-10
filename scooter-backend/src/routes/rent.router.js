@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   getAllRents,
   getAllActiveRents,
+  getActiveRentByDNI,
   insertRent,
   updateRent,
 } = require("../controllers/rent.controller.js");
@@ -31,6 +32,25 @@ router.get("/", getAllRents);
  *         description: Rents
  */
 router.get("/active", getAllActiveRents);
+
+/**
+ * @swagger
+ * /rents/active/{dni}:
+ *   get:
+ *     summary: Get active rent by DNI
+ *     tags: [Rents]
+ *     parameters:
+ *       - in: path
+ *         name: dni
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: DNI of the user
+ *     responses:
+ *       '200':
+ *         description: Rent
+ */
+router.get("/active/:dni", getActiveRentByDNI);
 
 /**
  * @swagger

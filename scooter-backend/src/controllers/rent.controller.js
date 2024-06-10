@@ -19,6 +19,13 @@ const getAllActiveRents = async (req, res) => {
   else res.status(404).send("Rents not found");
 };
 
+const getActiveRentByDNI = async (req, res) => {
+  const activeRent = await rentModel.findActiveRentByDNI(req.params.dni);
+
+  if (activeRent.rows.length > 0) res.status(200).json(activeRent.rows[0]);
+  else res.status(404).send("Rent not found");
+};
+
 const insertRent = async (req, res) => {
   const { DNI, Scooter_ID } = req.body;
 
@@ -96,7 +103,7 @@ const updateRent = async (req, res) => {
     await scooterModel.update(Scooter_ID, rentData.rows[0].Point_ID);
 
     res.status(201).send({
-      message: "Scooter updated successfully",
+      message: "Monopatín entregado correctamente.",
       data: rentData.rows[0],
     });
   } catch (error) {
@@ -107,6 +114,7 @@ const updateRent = async (req, res) => {
 module.exports = {
   getAllRents,
   getAllActiveRents,
+  getActiveRentByDNI,
   insertRent,
   updateRent,
 };
