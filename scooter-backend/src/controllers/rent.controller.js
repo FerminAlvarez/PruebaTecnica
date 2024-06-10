@@ -94,11 +94,11 @@ const calculateTime = async (DNI) => {
 };
 
 const updateRent = async (req, res) => {
-  const { Rent_ID, Scooter_ID } = req.body;
+  const { Rent_ID, Scooter_ID, Point_ID } = req.body;
 
   try {
     const rentData = await rentModel.update(Rent_ID);
-    await scooterModel.update(Scooter_ID, rentData.rows[0].Point_ID);
+    await scooterModel.update(Scooter_ID, Point_ID);
 
     res.status(201).send({
       message: "Monopatín entregado correctamente.",

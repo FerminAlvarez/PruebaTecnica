@@ -98,6 +98,9 @@ router.post("/", insertRent);
  *               Point_ID:
  *                 type: integer
  *                 description: point id
+ *               Scooter_ID:
+ *                 type: integer
+ *                 description: scooter id
  *     responses:
  *       '201':
  *         description: Rent updated
