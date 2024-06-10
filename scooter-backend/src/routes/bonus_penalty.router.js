@@ -42,7 +42,7 @@ router.get("/:dni", getBonusAndPenaltyByDNI);
 /**
  * @swagger
  * /bonus_penalties/{dni}/dates:
- *   get:
+ *   post:
  *     summary: Get bonus and penalties by DNI and date
  *     tags: [Bonus and Penalties]
  *     parameters:
@@ -52,28 +52,29 @@ router.get("/:dni", getBonusAndPenaltyByDNI);
  *           type: integer
  *         required: true
  *         description: DNI of the user
- *       - in: query
- *         name: start_date
- *         schema:
- *           type: string
- *           format: date-time
- *           example: 2017-07-21T17:32:28Z
- *         required: true
- *         description: Start date
- *       - in: query
- *         name: end_date
- *         schema:
- *           type: string
- *           format: date-time
- *           example: 2017-07-21T17:32:28Z
- *         required: true
- *         description: End date
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               start_date:
+ *                 type: string
+ *                 format: date
+ *                 required: true
+ *                 example: 2017-07-21T17:32:28Z
+ *               end_date:
+ *                 type: string
+ *                 format: date
+ *                 required: true
+ *                 example: 2017-07-21T17:32:28Z
  *     responses:
  *       '200':
  *         description: Bonus and penalties
  */
 
-router.get("/:dni/dates", getBonusAndPenaltyByDNIAndDate);
+router.post("/:dni/dates", getBonusAndPenaltyByDNIAndDate);
 
 /**
  * @swagger
