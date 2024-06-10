@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
   const [points, setPoints] = useState(undefined);
   const [selectedPoint, setSelectedPoint] = useState(undefined);
   const [rent, setRent] = useState(undefined);
   const [dni, setDni] = useState(undefined);
+  const router = useRouter();
+
 
   async function getPoints() {
     const res = await fetch("http://localhost:3001/points");
@@ -50,10 +54,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-screen flex-col items-center  p-24">
       <h1 className="font-bold text-2xl">Entrega de monopatines</h1>
 
-      <div className="grid grid-flow-row grid-cols-2 items-center w-2/3">
+      <div className="grid grid-flow-row grid-cols-2 justify-items-center w-2/3">
       <div className="w-5/6 text-center">
           <label>Ingrese su DNI</label>
           <input
@@ -108,6 +112,10 @@ export default function Home() {
         }
         
       </div>
+
+      <button className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"onClick={() => router.back()}>
+        Back
+      </button>
     </main>
   );
 }
