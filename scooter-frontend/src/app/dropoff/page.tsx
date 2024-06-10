@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
   const [points, setPoints] = useState(undefined);
@@ -36,14 +37,20 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Rent_ID: rent.rent_id, Point_ID: selectedPoint }),
+      body: JSON.stringify({
+        Rent_ID: rent.rent_id,
+        Point_ID: selectedPoint,
+        Scooter_ID: rent.scooter_id,
+      }),
     });
+    let data;
+    if (res.ok) {
+      data = await res.json();
 
-    let data = await res.json();
-
-    console.log(data);
-
-    alert(data.message);
+      alert(
+        `El monopatin fue retornado al punto de retiro. Minutos utilizados ${data.data.minutes_duration}`,
+      );
+    }
   }
 
   useEffect(() => {

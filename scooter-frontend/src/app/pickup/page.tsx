@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
   const [points, setPoints] = useState(undefined);
@@ -86,7 +87,7 @@ export default function Home() {
           >
             {!scooters && <option>No hay monopatines disponibles</option>}
 
-            {!selectedScooter && <option>Seleccione un punto de retiro</option>}
+            {!selectedScooter && <option>Seleccione un monopatín</option>}
 
             {scooters &&
               scooters.map((scooter) => (
