@@ -74,6 +74,4 @@ router.get("/:dni", getBonusAndPenaltyByDNI);
 
 router.get("/:dni/dates", getBonusAndPenaltyByDNIAndDate);
 
-
-
 module.exports = router;

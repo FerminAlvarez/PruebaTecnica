@@ -16,24 +16,36 @@ const getScooterById = async (req, res) => {
 };
 
 const insertScooter = async (req, res) => {
-  const { Scooter_ID, Point_ID } = req.body;
+  const { scooterId, pointId } = req.body;
 
-  const point = await pointModel.findById(Point_ID);
-  if (point.rows.length === 0) return res.status(404).send("Point not found");
+  try {
+    const point = await pointModel.findById(pointId);
+    if (!point) return res.status(404).send("Point not found");
 
-  const capacity = point.rows[0].capacity;
-  const scootersAtPoint = await pointModel.findScootersByPointId(Point_ID);
+    const isFull = await isPointAtCapacity(pointId);
+    if (isFull) return res.status(409).send("Point is full");
 
-  if (scootersAtPoint.rows.length >= capacity) return res.status(409).send("El punto de entrega se encuentra lleno.");
+    await insertScooterToPoint(scooterId, pointId);
+    res.status(201).send({ message: "Scooter created successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
 
-  scooterModel
-    .create(Scooter_ID, Point_ID)
-    .then(() => {
-      res.status(201).send({ message: "Scooter created successfully" });
-    })
-    .catch((error) => {
-      res.status(500).send({ message: error.message });
-    });
+const isPointAtCapacity = async (pointId) => {
+  const point = await findPointById(pointId);
+  if (!point) throw new Error("Point not found");
+
+  const scootersAtPoint = await pointModel.findScootersByPointId(pointId);
+  return scootersAtPoint.rows.length >= point.capacity;
+};
+
+const insertScooterToPoint = async (scooterId, pointId) => {
+  try {
+    await scooterModel.create(scooterId, pointId);
+  } catch (error) {
+    throw new Error("Failed to create scooter: " + error.message);
+  }
 };
 
 module.exports = {

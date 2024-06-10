@@ -15,15 +15,14 @@ const getScooterByPointId = async (req, res) => {
 };
 
 const insertPoint = async (req, res) => {
-  const { Point_ID, Location, Capacity } = req.body;
-  pointModel
-    .create(Point_ID, Location, Capacity)
-    .then(() => {
-      res.status(201).send({ message: "Point created successfully" });
-    })
-    .catch((error) => {
-      res.status(500).send({ message: error.message });
-    });
+  const { pointId, location, capacity } = req.body;
+
+  try {
+    await pointModel.create(pointId, location, capacity);
+    res.status(201).json({ message: "Point created successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

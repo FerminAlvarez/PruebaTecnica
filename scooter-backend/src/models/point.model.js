@@ -7,10 +7,7 @@ async function findAll() {
 }
 
 async function findById(id) {
-  return database.query(
-    `SELECT * FROM ${TABLE} WHERE Point_ID = $1`,
-    [id],
-  );
+  return database.query(`SELECT * FROM ${TABLE} WHERE Point_ID = $1`, [id]);
 }
 
 async function findScootersByPointId(id) {

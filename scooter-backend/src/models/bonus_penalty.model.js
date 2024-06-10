@@ -6,10 +6,7 @@ async function findAll() {
 }
 
 async function findByDNI(DNI) {
-  return database.query(
-    `SELECT * FROM ${TABLE} WHERE DNI = $1`,
-    [DNI],
-  );
+  return database.query(`SELECT * FROM ${TABLE} WHERE DNI = $1`, [DNI]);
 }
 
 async function findByDNIAndDate(dni, start_date, end_date) {
@@ -30,5 +27,5 @@ module.exports = {
   findAll,
   findByDNI,
   findByDNIAndDate,
-  create
+  create,
 };

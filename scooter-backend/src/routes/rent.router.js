@@ -1,5 +1,10 @@
 const { Router } = require("express");
-const { getAllRents, getAllActiveRents, insertRent, updateRent } = require("../controllers/rent.controller.js");
+const {
+  getAllRents,
+  getAllActiveRents,
+  insertRent,
+  updateRent,
+} = require("../controllers/rent.controller.js");
 
 const router = Router();
 
