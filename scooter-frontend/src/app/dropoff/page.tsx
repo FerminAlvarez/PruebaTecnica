@@ -2,14 +2,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-
 export default function Home() {
   const [points, setPoints] = useState(undefined);
   const [selectedPoint, setSelectedPoint] = useState(undefined);
   const [rent, setRent] = useState(undefined);
   const [dni, setDni] = useState(undefined);
   const router = useRouter();
-
 
   async function getPoints() {
     const res = await fetch("http://localhost:3001/points");
@@ -38,16 +36,15 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Rent_ID: rent.rent_id, Point_ID: selectedPoint}),
+      body: JSON.stringify({ Rent_ID: rent.rent_id, Point_ID: selectedPoint }),
     });
 
     let data = await res.json();
 
-    console.log(data)
+    console.log(data);
 
     alert(data.message);
   }
-
 
   useEffect(() => {
     getPoints();
@@ -58,7 +55,7 @@ export default function Home() {
       <h1 className="font-bold text-2xl">Entrega de monopatines</h1>
 
       <div className="grid grid-flow-row grid-cols-2 justify-items-center w-2/3">
-      <div className="w-5/6 text-center">
+        <div className="w-5/6 text-center">
           <label>Ingrese su DNI</label>
           <input
             className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
@@ -66,7 +63,6 @@ export default function Home() {
             onChange={(event) => setDni(event.target.value)}
           />
         </div>
-
 
         {points && (
           <div className="w-5/6 text-center">
@@ -99,21 +95,27 @@ export default function Home() {
           </div>
         )}
 
-
-        {dni && points && rent && 
+        {dni && points && rent && (
           <div className="w-5/6 text-center">
             <h2>Monopatin alquilado</h2>
-            <p>ID: {rent.scooter_id} - Fecha y hora de alquiler: {rent.start_date_time}</p>
-            <button className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-              onClick={() => updateRent()}> 
+            <p>
+              ID: {rent.scooter_id} - Fecha y hora de alquiler:{" "}
+              {rent.start_date_time}
+            </p>
+            <button
+              className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+              onClick={() => updateRent()}
+            >
               Entregar
             </button>
           </div>
-        }
-        
+        )}
       </div>
 
-      <button className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"onClick={() => router.back()}>
+      <button
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"
+        onClick={() => router.back()}
+      >
         Back
       </button>
     </main>

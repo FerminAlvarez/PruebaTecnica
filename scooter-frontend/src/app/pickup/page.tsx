@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-
 export default function Home() {
   const [points, setPoints] = useState(undefined);
   const [scooters, setScooters] = useState(undefined);
@@ -39,14 +38,13 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ DNI: dni, Scooter_ID: selectedScooter}),
+      body: JSON.stringify({ DNI: dni, Scooter_ID: selectedScooter }),
     });
 
     let data = await res.json();
 
     alert(data.message);
   }
-
 
   useEffect(() => {
     getPoints();
@@ -88,7 +86,7 @@ export default function Home() {
           >
             {!scooters && <option>No hay monopatines disponibles</option>}
 
-            {!selectedScooter && <option>Seleccione un punto de retiro</option> }
+            {!selectedScooter && <option>Seleccione un punto de retiro</option>}
 
             {scooters &&
               scooters.map((scooter) => (
@@ -102,21 +100,25 @@ export default function Home() {
           <input
             className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             type="number"
-            disabled= {!scooters}
+            disabled={!scooters}
             onChange={(event) => setDni(event.target.value)}
           />
         </div>
 
-        {dni && selectedScooter && 
-          <button className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-            onClick={() => rent()}> 
+        {dni && selectedScooter && (
+          <button
+            className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            onClick={() => rent()}
+          >
             Alquilar
           </button>
-        }
-        
+        )}
       </form>
 
-      <button className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"onClick={() => router.back()}>
+      <button
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"
+        onClick={() => router.back()}
+      >
         Back
       </button>
     </main>
