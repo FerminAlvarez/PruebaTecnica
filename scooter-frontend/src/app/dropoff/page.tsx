@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   const [points, setPoints] = useState(undefined);
-  const [selectedPoint, setSelectedPoint] = useState(undefined);
+  const [selectedPoint, setSelectedPoint] = useState(1);
   const [rent, setRent] = useState(undefined);
   const [dni, setDni] = useState(undefined);
   const router = useRouter();
@@ -38,6 +38,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        DNI: dni,
         Rent_ID: rent.rent_id,
         Point_ID: selectedPoint,
         Scooter_ID: rent.scooter_id,
@@ -48,7 +49,9 @@ export default function Home() {
       data = await res.json();
 
       alert(
-        `El monopatin fue retornado al punto de retiro. Minutos utilizados ${data.data.minutes_duration}`,
+        `El monopatin fue retornado al punto de retiro. Minutos utilizados ${data.data.minutes_duration}.\n
+        Tiempo total de bonus: ${data.total_time_bonus ? data.total_time_bonus : 0} minutos\n
+        Tiempo total de penalización: ${data.total_time_penalty ? data.total_time_penalty : 0} minutos\n`,
       );
     }
   }

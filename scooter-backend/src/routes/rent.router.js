@@ -92,6 +92,9 @@ router.post("/", insertRent);
  *           schema:
  *             type: object
  *             properties:
+ *               DNI:
+ *                 type: integer
+ *                 description: dni
  *               Rent_ID:
  *                 type: integer
  *                 description: rent id
