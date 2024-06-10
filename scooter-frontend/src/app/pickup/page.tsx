@@ -107,7 +107,7 @@ export default function Home() {
 
         {dni && selectedScooter && (
           <button
-            className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            className="w-5/6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-12 my-5"
             onClick={() => rent()}
           >
             Alquilar
@@ -115,12 +115,12 @@ export default function Home() {
         )}
       </form>
 
-      <button
+      <Link
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"
-        onClick={() => router.back()}
+        href="/"
       >
-        Back
-      </button>
+        Home
+      </Link>
     </main>
   );
 }

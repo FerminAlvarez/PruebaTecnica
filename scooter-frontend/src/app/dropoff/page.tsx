@@ -112,12 +112,12 @@ export default function Home() {
         )}
       </div>
 
-      <button
+      <Link
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-12"
-        onClick={() => router.back()}
+        href="/"
       >
-        Back
-      </button>
+        Home
+      </Link>
     </main>
   );
 }
