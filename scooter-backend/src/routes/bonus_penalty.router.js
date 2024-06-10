@@ -63,12 +63,12 @@ router.get("/:dni", getBonusAndPenaltyByDNI);
  *                 type: string
  *                 format: date
  *                 required: true
- *                 example: 2017-07-21T17:32:28Z
+ *                 example: 2024-06-01 00:00:00
  *               end_date:
  *                 type: string
  *                 format: date
  *                 required: true
- *                 example: 2017-07-21T17:32:28Z
+ *                 example: 2024-06-10 23:59:59
  *     responses:
  *       '200':
  *         description: Bonus and penalties

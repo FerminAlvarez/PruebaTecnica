@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   getAllRents,
   getAllActiveRents,
+  getRentByDNIAndDate,
   getActiveRentByDNI,
   insertRent,
   updateRent,
@@ -32,6 +33,42 @@ router.get("/", getAllRents);
  *         description: Rents
  */
 router.get("/active", getAllActiveRents);
+
+/**
+ * @swagger
+ * /rents/{dni}/dates:
+ *   post:
+ *     summary: Get rent by DNI and date
+ *     tags: [Rents]
+ *     parameters:
+ *       - in: path
+ *         name: dni
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: DNI of the user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               start_date:
+ *                 type: string
+ *                 format: date
+ *                 required: true
+ *                 example: 2024-01-01 00:00:00
+ *               end_date:
+ *                 type: string
+ *                 format: date
+ *                 required: true
+ *                 example: 2024-06-10 23:59:59
+ *     responses:
+ *       '200':
+ *         description: Rent
+ */
+router.post("/:dni/dates", getRentByDNIAndDate);
 
 /**
  * @swagger

@@ -10,11 +10,19 @@ export default function Home() {
       >
         Reservas
       </Link>
+
       <Link
         className="w-1/3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-3"
         href="/dropoff"
       >
         Entregas
+      </Link>
+
+      <Link
+        className="w-1/3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-3"
+        href="/report"
+      >
+        Reportes
       </Link>
     </main>
   );
