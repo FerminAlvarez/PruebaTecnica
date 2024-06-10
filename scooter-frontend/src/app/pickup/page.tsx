@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Home() {
@@ -8,7 +7,6 @@ export default function Home() {
   const [scooters, setScooters] = useState(undefined);
   const [selectedScooter, setSelectedScooter] = useState(undefined);
   const [dni, setDni] = useState(undefined);
-  const router = useRouter();
 
   async function getPoints() {
     const res = await fetch("http://localhost:3001/points");
