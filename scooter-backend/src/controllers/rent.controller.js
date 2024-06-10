@@ -33,11 +33,9 @@ const insertRent = async (req, res) => {
     const activeRent = await userHasActiveRent(DNI);
 
     if (activeRent) {
-      return res
-        .status(409)
-        .send({
-          message: "El usuario ya tiene un monopatín alquilado activo.",
-        });
+      return res.status(409).send({
+        message: "El usuario ya tiene un monopatín alquilado activo.",
+      });
     }
 
     const rentData = await rentModel.create(DNI, Scooter_ID);

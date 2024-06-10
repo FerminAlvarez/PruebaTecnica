@@ -14,9 +14,11 @@ async function findActiveRents() {
 }
 
 async function findActiveRentByDNI(DNI) {
-  return database.query(`SELECT * FROM ${TABLE} WHERE End_Date_Time IS NULL and DNI = $1`, [DNI]);
+  return database.query(
+    `SELECT * FROM ${TABLE} WHERE End_Date_Time IS NULL and DNI = $1`,
+    [DNI],
+  );
 }
-
 
 async function findWithEndtimeNull(DNI) {
   return database.query(
