@@ -100,3 +100,12 @@ INSERT INTO Point (Location, Capacity) VALUES
 ('Calle 4', 10),
 ('Calle 5', 10),
 ('Calle 6', 10);
+
+INSERT INTO Scooter (Scooter_ID, Status, Point_ID) VALUES
+('scooter1', 'available', 1),
+('scooter11', 'available', 1),
+('scooter2', 'available', 2),
+('scooter3', 'available', 3),
+('scooter4', 'available', 4),
+('scooter5', 'available', 5),
+('scooter6', 'available', 6);
