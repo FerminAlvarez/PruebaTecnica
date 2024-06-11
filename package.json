@@ -1,0 +1,17 @@
+{
+  "name": "Prueba tecnica",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "scooter-backend",
+    "scooter-frontend"
+  ],
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd scooter-frontend && npm run dev",
+    "start:backend": "cd scooter-backend && npm run dev"
+  }, 
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
