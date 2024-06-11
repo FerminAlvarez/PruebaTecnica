@@ -98,7 +98,7 @@ router.post("/:dni/dates", getBonusAndPenaltyByDNIAndDate);
  *             properties:
  *               Type:
  *                 type: string
- *                 enum: [bonus, penalty]
+ *                 enum: [bonus, penalty, reset]
  *                 required: true
  *               Minutes:
  *                 type: integer

@@ -33,9 +33,9 @@ CREATE TABLE Rent (
 CREATE TABLE Bonus_Penalty_History (
     History_ID SERIAL PRIMARY KEY,
     DNI INT,
-    Type VARCHAR(10) CHECK (Type IN ('bonus', 'penalty')),
+    Type VARCHAR(10) CHECK (Type IN ('bonus', 'penalty', 'reset')),
     Minutes INT,
-    Date DATE
+    Date TIMESTAMP
 );
 
 -- Create trigger function to set scooter status to 'rented'
